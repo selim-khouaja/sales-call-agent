@@ -16,3 +16,5 @@ wheels/
 .pytest_cache/
 roadmap.md
 CLAUDE.md
+*/.DS_Store
+.DS_Store
