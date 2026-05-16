@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from openai import OpenAI
 
 from .schemas import CallAnalysis
+from ._schema_utils import make_strict_schema
 
 
 def _clean_json(raw: str) -> str:
@@ -27,7 +28,7 @@ If something is unclear or not mentioned, use null rather than guessing."""
 
 
 def _build_response_format() -> dict:
-    schema = CallAnalysis.model_json_schema()
+    schema = make_strict_schema(CallAnalysis.model_json_schema())
     return {
         "type": "json_schema",
         "json_schema": {

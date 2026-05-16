@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from .schemas import CallAnalysis, CompanyProfile, RoutingDecision, EnrichedCallResult
 from .tools import TOOLS, TOOL_MAP
 from .follow_up import generate_follow_up, generate_slack_summary
+from ._schema_utils import make_strict_schema
 
 
 # Wrapper model for a single structured extraction call
@@ -17,7 +18,7 @@ class _EnrichmentResult(BaseModel):
 
 
 def _build_extraction_format() -> dict:
-    schema = _EnrichmentResult.model_json_schema()
+    schema = make_strict_schema(_EnrichmentResult.model_json_schema())
     return {
         "type": "json_schema",
         "json_schema": {

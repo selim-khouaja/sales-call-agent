@@ -2,6 +2,7 @@ from openai import OpenAI
 from pydantic import BaseModel
 
 from .schemas import CallAnalysis, CompanyProfile, RoutingDecision
+from ._schema_utils import make_strict_schema
 
 
 class _EmailResult(BaseModel):
@@ -50,7 +51,7 @@ Requirements: professional but warm, under 120 words, reference the specific nex
             "json_schema": {
                 "name": "EmailResult",
                 "strict": True,
-                "schema": _EmailResult.model_json_schema(),
+                "schema": make_strict_schema(_EmailResult.model_json_schema()),
             },
         },
         max_tokens=2048,
@@ -96,7 +97,7 @@ Keep it under 80 words. Include the priority and suggested action prominently.""
             "json_schema": {
                 "name": "SlackResult",
                 "strict": True,
-                "schema": _SlackResult.model_json_schema(),
+                "schema": make_strict_schema(_SlackResult.model_json_schema()),
             },
         },
         max_tokens=1024,
