@@ -20,38 +20,6 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "http://agent:8000/analyze/transcript",
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "transcript",
-              "value": "={{ $json.body.transcript }}"
-            },
-            {
-              "name": "call_id",
-              "value": "={{ $json.body.call_id }}"
-            },
-            {
-              "name": "rep_name",
-              "value": "={{ $json.body.rep_name }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        208,
-        0
-      ],
-      "id": "92342c53-9e09-41cb-9605-37aeff2135e1",
-      "name": "HTTP Request"
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -226,7 +194,7 @@
           "companyName": "={{ $json.call_analysis.company_name}}",
           "firstName": "={{ $json.call_analysis.contact_name.split(' ')[0] }}",
           "jobTitle": "={{ $json.call_analysis.contact_title }}",
-          "lastName": "={{ $json.call_analysis.contact_name.split(' ')[1] }}"
+          "lastName": "={{ $json.call_analysis.contact_name }}"
         },
         "options": {
           "resolveData": false
@@ -251,17 +219,10 @@
       "parameters": {
         "authentication": "appToken",
         "resource": "deal",
-        "stage": "={{ $json.call_analysis.company_name }} — {{ $json.call_analysis.deal_stage }}",
+        "stage": "={{\n  {\n    'Discovery': 'appointmentscheduled',\n    'Qualification': 'qualifiedtobuy',\n    'Proposal': 'presentationscheduled',\n    'Negotiation': 'contractsent',\n    'Closed Won': 'closedwon',\n    'Closed Lost': 'closedlost'\n  }[$('Call Agent').item.json.call_analysis.deal_stage] || 'appointmentscheduled'\n}}",
         "additionalFields": {
-          "customPropertiesUi": {
-            "customPropertiesValues": [
-              {
-                "property": "=Priority",
-                "value": "={{ $json.routing.priority }}"
-              }
-            ]
-          },
-          "description": "={{ $json.call_analysis.summary }}"
+          "associatedCompany": "={{ $('Call Agent').item.json.call_analysis.company_name }}",
+          "description": "={{ $('Call Agent').item.json.call_analysis.summary }}"
         }
       },
       "type": "n8n-nodes-base.hubspot",
@@ -278,6 +239,38 @@
           "name": "HubSpot account"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://agent:8000/analyze/transcript",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "transcript",
+              "value": "={{ $json.body.transcript }}"
+            },
+            {
+              "name": "call_id",
+              "value": "={{ $json.body.call_id }}"
+            },
+            {
+              "name": "rep_name",
+              "value": "={{ $json.body.rep_name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "92342c53-9e09-41cb-9605-37aeff2135e1",
+      "name": "Call Agent"
     }
   ],
   "pinData": {},
@@ -286,18 +279,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request": {
-      "main": [
-        [
-          {
-            "node": "If",
+            "node": "Call Agent",
             "type": "main",
             "index": 0
           }
@@ -358,6 +340,17 @@
           }
         ]
       ]
+    },
+    "Call Agent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -365,7 +358,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "6f9f786f-e9e1-4935-b932-3599e4ee586d",
+  "versionId": "746c5286-03c2-47df-9884-652995f40eae",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "48ec58c0d7ab7b911ec969e0805d8de275a7ffd94655e14ad0a8897de12ec962"

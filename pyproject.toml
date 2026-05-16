@@ -23,3 +23,4 @@ dev = [
 
 [tool.pytest.ini_options]
 pythonpath = ["src", "."]
+markers = ["integration: requires docker-compose stack running (docker-compose up --build)"]
