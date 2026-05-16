@@ -1,4 +1,5 @@
 import json
+import re
 from typing import Optional
 
 from openai import OpenAI
@@ -40,7 +41,7 @@ Be decisive. Urgent = active negotiation with strong buy signals. High = clear n
 def enrich_and_route(
     analysis: CallAnalysis,
     client: Optional[OpenAI] = None,
-    model: str = "openai/gpt-4o",
+    model: Optional[str] = None,
 ) -> EnrichedCallResult:
     if client is None:
         import os
@@ -48,6 +49,9 @@ def enrich_and_route(
             base_url="https://openrouter.ai/api/v1",
             api_key=os.environ["OPENROUTER_API_KEY"],
         )
+    if model is None:
+        import os
+        model = os.environ.get("OPENROUTER_MODEL", "openai/gpt-oss-20b:free")
 
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
@@ -64,6 +68,7 @@ def enrich_and_route(
             messages=messages,
             tools=TOOLS,
             tool_choice="auto",
+            max_tokens=2048,
         )
         msg = response.choices[0].message
 
@@ -98,10 +103,18 @@ def enrich_and_route(
         model=model,
         messages=extraction_messages,
         response_format=_build_extraction_format(),
+        max_tokens=4096,
     )
-    enrichment = _EnrichmentResult.model_validate_json(
-        extraction_response.choices[0].message.content
-    )
+    raw = extraction_response.choices[0].message.content
+    # Strip markdown code fences if the model wrapped the JSON
+    match = re.search(r"```(?:json)?\s*([\s\S]*?)\s*```", raw)
+    if match:
+        raw = match.group(1).strip()
+    else:
+        start, end = raw.find("{"), raw.rfind("}")
+        if start != -1 and end != -1:
+            raw = raw[start : end + 1]
+    enrichment = _EnrichmentResult.model_validate_json(raw)
 
     return EnrichedCallResult(
         call_analysis=analysis,

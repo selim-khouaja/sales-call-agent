@@ -16,7 +16,7 @@ def generate_follow_up(
     analysis: CallAnalysis,
     company: CompanyProfile,
     client: OpenAI | None = None,
-    model: str = "openai/gpt-4o",
+    model: str | None = None,
 ) -> str:
     if client is None:
         import os
@@ -24,6 +24,9 @@ def generate_follow_up(
             base_url="https://openrouter.ai/api/v1",
             api_key=os.environ["OPENROUTER_API_KEY"],
         )
+    if model is None:
+        import os
+        model = os.environ.get("OPENROUTER_MODEL", "openai/gpt-oss-20b:free")
 
     objections = ", ".join(analysis.objections) if analysis.objections else "none"
     next_steps = ", ".join(analysis.next_steps) if analysis.next_steps else "to be confirmed"
@@ -50,6 +53,7 @@ Requirements: professional but warm, under 120 words, reference the specific nex
                 "schema": _EmailResult.model_json_schema(),
             },
         },
+        max_tokens=2048,
     )
     return _EmailResult.model_validate_json(response.choices[0].message.content).email_body
 
@@ -58,7 +62,7 @@ def generate_slack_summary(
     analysis: CallAnalysis,
     routing: RoutingDecision,
     client: OpenAI | None = None,
-    model: str = "openai/gpt-4o",
+    model: str | None = None,
 ) -> str:
     if client is None:
         import os
@@ -66,6 +70,9 @@ def generate_slack_summary(
             base_url="https://openrouter.ai/api/v1",
             api_key=os.environ["OPENROUTER_API_KEY"],
         )
+    if model is None:
+        import os
+        model = os.environ.get("OPENROUTER_MODEL", "openai/gpt-oss-20b:free")
 
     prompt = f"""Write a short Slack notification for a sales call summary. Use plain markdown (bold with *, bullet points with -).
 
@@ -92,5 +99,6 @@ Keep it under 80 words. Include the priority and suggested action prominently.""
                 "schema": _SlackResult.model_json_schema(),
             },
         },
+        max_tokens=1024,
     )
     return _SlackResult.model_validate_json(response.choices[0].message.content).slack_message
