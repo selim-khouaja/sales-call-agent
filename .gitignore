@@ -14,3 +14,7 @@ wheels/
 
 # Test cache
 .pytest_cache/
+roadmap.md
+CLAUDE.md
+*/.DS_Store
+.DS_Store

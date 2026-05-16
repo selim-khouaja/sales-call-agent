@@ -1,0 +1,39 @@
+David: Hi Sophie, thanks again for taking the time.
+
+Sophie: Yeah, of course. Uh, I only have about 20 minutes today.
+
+David: Totally fine. Last time we spoke, it sounded like the team liked the product, especially around threat detection. Is that still the case?
+
+Sophie: Yes—technically, no issues. The team actually prefers your UI over CrowdStrike, which is… rare.
+
+David: I'll take that as a win. So where are things getting stuck?
+
+Sophie: Pricing, mainly. And—uh—internal timing.
+
+David: Okay. On pricing, is it the total budget or how it's structured?
+
+Sophie: Both, kind of. Finance is pushing back on the annual commitment. They'd prefer something more flexible.
+
+David: Got it. We might be able to adjust terms slightly, though fully monthly would be tricky.
+
+Sophie: Yeah, I figured. Also, there's a bit of hesitation because we already renewed with our current vendor for part of the stack.
+
+David: Ah, okay. So this would be more of a partial replacement?
+
+Sophie: Exactly. Which makes the ROI… harder to justify immediately.
+
+David: That makes sense. If we could show a phased rollout—like starting with your highest-risk endpoints—would that help?
+
+Sophie: Maybe. I mean, I'd need to bring that back internally.
+
+David: Of course. Would it help if I put together a revised proposal with a phased approach and adjusted pricing tiers?
+
+Sophie: Yeah, you can send it. I can't promise anything, though.
+
+David: Totally fair. When would be a good time to revisit?
+
+Sophie: Uh… probably not before next month. We're in budgeting cycles right now.
+
+David: Understood. I'll follow up with something concrete, and we can regroup then.
+
+Sophie: Sounds good.

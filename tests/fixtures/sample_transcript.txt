@@ -1,0 +1,138 @@
+
+**Transcript 1: Positive Discovery Call (B2B SaaS – HR Tech)**
+
+**Participants:**  
+- Alice (Sales, HR software company)  
+- Marc (Head of People, Series B startup)
+
+Alice: Hey Marc, can you hear me okay?
+
+Marc: Yeah, yeah, all good. Sorry, just jumping out of another call.
+
+Alice: No worries at all. I’ll keep this pretty conversational. I saw you’re scaling pretty fast—around 120 employees now?
+
+Marc: Uh, yeah, we actually crossed 130 last week. It’s… been a bit chaotic, to be honest.
+
+Alice: I can imagine. What’s been the hardest part on the people side?
+
+Marc: Honestly, onboarding. Like, we have stuff in Notion, some docs here and there, but it’s not structured. New hires keep asking the same questions and—uh—it’s just not scalable. And we’re about to hire another 40 people in Q3, so this is going to break completely if we don’t fix it now.
+
+Alice: Got it. So it’s more about consistency and making sure people ramp quickly—especially with that hiring surge coming?
+
+Marc: Exactly. And also compliance, especially with remote hires. We’re in France, Germany, and… uh, we’re opening Spain soon. Our legal team flagged us last week, actually—apparently our current contract process doesn’t meet GDPR requirements for some of the new jurisdictions. We need this sorted before end of June or we’re exposed.
+
+Alice: Okay, that’s urgent. And today, how are you managing contracts and employee data?
+
+Marc: Bit of a mess, if I’m honest. Some stuff in Excel, some in Deel, some in—uh—I don’t even know anymore.
+
+Alice: How big is the contract you’d be looking at? Just to understand the scope.
+
+Marc: We’ve got budget approved for up to €180k annually. The board signed off on it last week specifically because of the compliance issue—they want this live before the Q3 hiring wave starts. That’s July 1st, so we have maybe five weeks.
+
+Alice: Five weeks is tight but doable. And who else is involved in the decision?
+
+Marc: It’s me and our CFO, Sarah. She’s already seen two vendors this week. Honestly, if your demo hits the compliance angle hard, I think we can move fast—like, decision by end of next week fast.
+
+Alice: That’s very helpful. Would it make sense to walk you through a focused demo on the compliance and onboarding pieces specifically, with Sarah in the room?
+
+Marc: Yeah, for sure. I’d want our Ops lead there too. Can you do this Thursday or Friday?
+
+Alice: Absolutely. I’ll send you a calendar invite for Thursday at 2pm—does that work?
+
+Marc: Thursday works. Let’s do it.
+
+
+**Transcript 2: Stalled Negotiation (Cybersecurity Platform – Mid-Market Enterprise)**
+
+**Participants:**  
+- David (Account Executive, cybersecurity vendor)  
+- Sophie (CISO, retail company)
+
+David: Hi Sophie, thanks again for taking the time.
+
+Sophie: Yeah, of course. Uh, I only have about 20 minutes today.
+
+David: Totally fine. Last time we spoke, it sounded like the team liked the product, especially around threat detection. Is that still the case?
+
+Sophie: Yes—technically, no issues. The team actually prefers your UI over CrowdStrike, which is… rare.
+
+David: I’ll take that as a win. So where are things getting stuck?
+
+Sophie: Pricing, mainly. And—uh—internal timing.
+
+David: Okay. On pricing, is it the total budget or how it’s structured?
+
+Sophie: Both, kind of. Finance is pushing back on the annual commitment. They’d prefer something more flexible.
+
+David: Got it. We might be able to adjust terms slightly, though fully monthly would be tricky.
+
+Sophie: Yeah, I figured. Also, there’s a bit of hesitation because we already renewed with our current vendor for part of the stack.
+
+David: Ah, okay. So this would be more of a partial replacement?
+
+Sophie: Exactly. Which makes the ROI… harder to justify immediately.
+
+David: That makes sense. If we could show a phased rollout—like starting with your highest-risk endpoints—would that help?
+
+Sophie: Maybe. I mean, I’d need to bring that back internally.
+
+David: Of course. Would it help if I put together a revised proposal with a phased approach and adjusted pricing tiers?
+
+Sophie: Yeah, you can send it. I can’t promise anything, though.
+
+David: Totally fair. When would be a good time to revisit?
+
+Sophie: Uh… probably not before next month. We’re in budgeting cycles right now.
+
+David: Understood. I’ll follow up with something concrete, and we can regroup then.
+
+Sophie: Sounds good.
+
+***
+
+**Transcript 3: Near-Lost Deal (Industrial IoT – Manufacturing Client)**
+
+
+Karim: Hey Luca, appreciate you joining. I know this has been a… long process.
+
+Luca: Yeah, uh, no problem. Let’s get straight to it.
+
+Karim: Sure. Last we spoke, you were evaluating us alongside two other vendors. Where do things stand?
+
+Luca: Honestly… not great for you guys.
+
+Karim: Okay, I appreciate the transparency. What’s driving that?
+
+Luca: Integration. Your system looks good, but our team feels like it’s going to take too long to deploy. The other vendor—uh—what’s their name—SenseGrid? They claim they can be live in 4 weeks.
+
+Karim: Got it. And for us, the concern is more like… 10–12 weeks?
+
+Luca: Yeah, and we don’t have that kind of time. We have downtime issues now.
+
+Karim: Understood. Just to clarify, is it purely timeline, or also internal resource constraints?
+
+Luca: Both. My engineers are already overloaded. If your solution needs heavy customization, it’s a problem.
+
+Karim: That’s fair. I think there might be a misunderstanding there—we actually have a lighter deployment option that we didn’t fully cover.
+
+Luca: I mean… maybe, but it wasn’t clear in the demo.
+
+Karim: That’s on us. If we could show a version that gets you live in, say, 5–6 weeks with minimal engineering effort, would you reconsider?
+
+Luca: Uh… maybe. But we’re already pretty far with SenseGrid.
+
+Karim: Are you at the contract stage?
+
+Luca: Not signed yet, but close.
+
+Karim: Okay. Would it be worth a 30-minute technical session with your lead engineer to validate feasibility before you commit?
+
+Luca: I can ask him. No guarantees.
+
+Karim: That’s all I’m asking. If it doesn’t fit, totally fair—but I’d hate for you to miss a potentially better long-term fit because of a misunderstanding.
+
+Luca: Yeah… okay. Send me something, and I’ll see if we can fit it in this week.
+
+Karim: Appreciate it. I’ll follow up right after this.
+
+*

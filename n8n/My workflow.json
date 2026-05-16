@@ -1,0 +1,368 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/call-ended-raw",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d4aa47e0-4668-4e8f-8e72-de2a74ce74f0",
+      "name": "Webhook",
+      "webhookId": "2d3ce310-0e98-4765-b865-69e08cab7c03"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e85e44c7-6591-4796-8c70-6686b2a947a7",
+              "leftValue": "={{ $json.routing.priority }}",
+              "rightValue": "^(Urgent|High)$",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "5f180191-82de-48ab-baac-2c0c82e10b50",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "deals-urgent",
+          "mode": "name"
+        },
+        "text": "=*New {{ $json.routing.priority }} Priority Call* 🚨\n\n*Company:* {{ $json.call_analysis.company_name }}\n*Contact:* {{ $json.call_analysis.contact_name }} ({{ $json.call_analysis.contact_title }})\n*Deal Stage:* {{ $json.call_analysis.deal_stage }}\n*Sentiment:* {{ $json.call_analysis.sentiment }}\n\n*Suggested Action:* {{ $json.routing.suggested_action }}\n*Escalate to Manager:* {{ $json.routing.escalate_to_manager }}\n\n{{ $json.slack_summary }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        608,
+        -112
+      ],
+      "id": "b89a69e4-67b2-4004-9d62-32b004ae5cb7",
+      "name": "Send a message",
+      "webhookId": "d36dc683-a506-4b84-b90c-c136ff81fe44",
+      "credentials": {
+        "slackApi": {
+          "id": "aywIaIvyoINXCXmO",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=selimkhouaja.ic@gmail.com",
+        "subject": "={{ $json.call_analysis.company_name }} — {{ $json.routing.priority }} priority call recap",
+        "message": "={{ $json.follow_up_email }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        608,
+        -448
+      ],
+      "id": "ae535b06-04f2-4ad5-bb10-d87fd281d51c",
+      "name": "Send a message1",
+      "webhookId": "ea91b8b5-2498-45cb-84ae-8f57618d9790",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "6Ke0x7ojBYg8EZAu",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "selimkhouaja.ic@gmail.com",
+        "subject": "={{ $json.call_analysis.company_name }} — {{ $json.routing.priority }} priority call recap",
+        "message": "={{ $json.follow_up_email }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        256
+      ],
+      "id": "0ef837ed-aa55-4c4b-9d6d-9c3829b57645",
+      "name": "Send a message2",
+      "webhookId": "df544f25-4313-4f27-b2a9-9b6d434d1ed8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "6Ke0x7ojBYg8EZAu",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "appToken",
+        "email": "selimkhouaja.ic@gmail.com",
+        "additionalFields": {
+          "companyName": "={{ $json.call_analysis.company_name}}",
+          "firstName": "={{ $json.call_analysis.contact_name.split(' ')[0] }}",
+          "jobTitle": "={{ $json.call_analysis.contact_title }}",
+          "lastName": "={{ $json.call_analysis.contact_name.split(' ')[1] }}"
+        },
+        "options": {
+          "resolveData": false
+        }
+      },
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.2,
+      "position": [
+        608,
+        -272
+      ],
+      "id": "41527c3f-252e-4c55-befd-8c158d699871",
+      "name": "Create or update a contact",
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "mfbMZvNwuq5suzPz",
+          "name": "HubSpot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "appToken",
+        "resource": "deal",
+        "stage": "={{ $json.call_analysis.company_name }} — {{ $json.call_analysis.deal_stage }}",
+        "additionalFields": {
+          "customPropertiesUi": {
+            "customPropertiesValues": [
+              {
+                "property": "=Priority",
+                "value": "={{ $json.routing.priority }}"
+              }
+            ]
+          },
+          "description": "={{ $json.call_analysis.summary }}"
+        }
+      },
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.2,
+      "position": [
+        816,
+        -272
+      ],
+      "id": "38c9ac05-8950-4a17-b202-246f70410080",
+      "name": "Create a deal",
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "mfbMZvNwuq5suzPz",
+          "name": "HubSpot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "appToken",
+        "email": "selimkhouaja.ic@gmail.com",
+        "additionalFields": {
+          "companyName": "={{ $json.call_analysis.company_name}}",
+          "firstName": "={{ $json.call_analysis.contact_name.split(' ')[0] }}",
+          "jobTitle": "={{ $json.call_analysis.contact_title }}",
+          "lastName": "={{ $json.call_analysis.contact_name }}"
+        },
+        "options": {
+          "resolveData": false
+        }
+      },
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.2,
+      "position": [
+        640,
+        80
+      ],
+      "id": "70bf11b8-9711-4bc2-b841-5ad519334a89",
+      "name": "Create or update a contact1",
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "mfbMZvNwuq5suzPz",
+          "name": "HubSpot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "appToken",
+        "resource": "deal",
+        "stage": "={{\n  {\n    'Discovery': 'appointmentscheduled',\n    'Qualification': 'qualifiedtobuy',\n    'Proposal': 'presentationscheduled',\n    'Negotiation': 'contractsent',\n    'Closed Won': 'closedwon',\n    'Closed Lost': 'closedlost'\n  }[$('Call Agent').item.json.call_analysis.deal_stage] || 'appointmentscheduled'\n}}",
+        "additionalFields": {
+          "associatedCompany": "={{ $('Call Agent').item.json.call_analysis.company_name }}",
+          "description": "={{ $('Call Agent').item.json.call_analysis.summary }}"
+        }
+      },
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.2,
+      "position": [
+        848,
+        80
+      ],
+      "id": "39314f80-dbf0-45c1-8672-9f69da49ce22",
+      "name": "Create a deal1",
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "mfbMZvNwuq5suzPz",
+          "name": "HubSpot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://agent:8000/analyze/transcript",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "transcript",
+              "value": "={{ $json.body.transcript }}"
+            },
+            {
+              "name": "call_id",
+              "value": "={{ $json.body.call_id }}"
+            },
+            {
+              "name": "rep_name",
+              "value": "={{ $json.body.rep_name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "92342c53-9e09-41cb-9605-37aeff2135e1",
+      "name": "Call Agent"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Call Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create or update a contact",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create or update a contact1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create or update a contact": {
+      "main": [
+        [
+          {
+            "node": "Create a deal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create or update a contact1": {
+      "main": [
+        [
+          {
+            "node": "Create a deal1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Agent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "746c5286-03c2-47df-9884-652995f40eae",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "48ec58c0d7ab7b911ec969e0805d8de275a7ffd94655e14ad0a8897de12ec962"
+  },
+  "id": "QuRZqiHpUGihgCIU",
+  "tags": []
+}
