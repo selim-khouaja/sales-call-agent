@@ -1,0 +1,41 @@
+Karim: Hey Luca, appreciate you joining. I know this has been a… long process.
+
+Luca: Yeah, uh, no problem. Let's get straight to it.
+
+Karim: Sure. Last we spoke, you were evaluating us alongside two other vendors. Where do things stand?
+
+Luca: Honestly… not great for you guys.
+
+Karim: Okay, I appreciate the transparency. What's driving that?
+
+Luca: Integration. Your system looks good, but our team feels like it's going to take too long to deploy. The other vendor—uh—what's their name—SenseGrid? They claim they can be live in 4 weeks.
+
+Karim: Got it. And for us, the concern is more like… 10–12 weeks?
+
+Luca: Yeah, and we don't have that kind of time. We have downtime issues now.
+
+Karim: Understood. Just to clarify, is it purely timeline, or also internal resource constraints?
+
+Luca: Both. My engineers are already overloaded. If your solution needs heavy customization, it's a problem.
+
+Karim: That's fair. I think there might be a misunderstanding there—we actually have a lighter deployment option that we didn't fully cover.
+
+Luca: I mean… maybe, but it wasn't clear in the demo.
+
+Karim: That's on us. If we could show a version that gets you live in, say, 5–6 weeks with minimal engineering effort, would you reconsider?
+
+Luca: Uh… maybe. But we're already pretty far with SenseGrid.
+
+Karim: Are you at the contract stage?
+
+Luca: Not signed yet, but close.
+
+Karim: Okay. Would it be worth a 30-minute technical session with your lead engineer to validate feasibility before you commit?
+
+Luca: I can ask him. No guarantees.
+
+Karim: That's all I'm asking. If it doesn't fit, totally fair—but I'd hate for you to miss a potentially better long-term fit because of a misunderstanding.
+
+Luca: Yeah… okay. Send me something, and I'll see if we can fit it in this week.
+
+Karim: Appreciate it. I'll follow up right after this.

@@ -9,7 +9,6 @@ the n8n webhook because:
   - The production webhook needs active=true + live Slack/Gmail/HubSpot credentials
   - The FastAPI pipeline is the meaningful agent logic; n8n is routing glue on top of it
 """
-import re
 import httpx
 import pytest
 from pathlib import Path
@@ -17,20 +16,16 @@ from pathlib import Path
 AGENT_URL = "http://localhost:8000"
 FIXTURES = Path(__file__).parent / "fixtures"
 
+# Ordered: index 0 must be High/Urgent, indices 1+ must include at least one Low/Medium
+TRANSCRIPT_FILES = [
+    ("positive_discovery", FIXTURES / "transcript_1_positive_discovery.txt"),
+    ("stalled_negotiation", FIXTURES / "transcript_2_stalled_negotiation.txt"),
+    ("near_lost_deal",     FIXTURES / "transcript_3_near_lost_deal.txt"),
+]
+
 
 def _load_transcripts() -> list[tuple[str, str]]:
-    """Return list of (label, transcript_text) parsed from sample_transcript.txt."""
-    raw = (FIXTURES / "sample_transcript.txt").read_text()
-    chunks = re.split(r"\*\*Transcript \d+:", raw)
-    results = []
-    for chunk in chunks:
-        chunk = chunk.strip()
-        if not chunk:
-            continue
-        first_newline = chunk.find("\n")
-        label = chunk[:first_newline].strip(" *") if first_newline != -1 else "transcript"
-        results.append((label, chunk))
-    return results
+    return [(label, path.read_text()) for label, path in TRANSCRIPT_FILES]
 
 
 @pytest.fixture(scope="session")
