@@ -43,6 +43,7 @@ def extract_from_transcript(
     call_id: str | None = None,
     client: OpenAI | None = None,
     model: str | None = None,
+    max_retries: int = 3,
 ) -> CallAnalysis:
     if client is None:
         import os
@@ -54,18 +55,26 @@ def extract_from_transcript(
         import os
         model = os.environ.get("OPENROUTER_MODEL", "openai/gpt-oss-20b:free")
 
-    response = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": transcript},
-        ],
-        response_format=_build_response_format(),
-        max_tokens=4096,
-    )
-
-    raw = _clean_json(response.choices[0].message.content)
-    analysis = CallAnalysis.model_validate_json(raw)
+    last_exc: Exception | None = None
+    for _ in range(max_retries):
+        response = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": transcript},
+            ],
+            response_format=_build_response_format(),
+            max_tokens=4096,
+        )
+        try:
+            raw = _clean_json(response.choices[0].message.content)
+            analysis = CallAnalysis.model_validate_json(raw)
+            break
+        except Exception as exc:
+            last_exc = exc
+            continue
+    else:
+        raise ValueError(f"Failed to parse valid CallAnalysis after {max_retries} attempts") from last_exc
 
     # Overwrite fields set by the system, not extracted from the transcript
     analysis.call_id = call_id or str(uuid.uuid4())

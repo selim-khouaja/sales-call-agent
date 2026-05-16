@@ -99,22 +99,30 @@ def enrich_and_route(
             ),
         }
     ]
-    extraction_response = client.chat.completions.create(
-        model=model,
-        messages=extraction_messages,
-        response_format=_build_extraction_format(),
-        max_tokens=4096,
-    )
-    raw = extraction_response.choices[0].message.content
-    # Strip markdown code fences if the model wrapped the JSON
-    match = re.search(r"```(?:json)?\s*([\s\S]*?)\s*```", raw)
-    if match:
-        raw = match.group(1).strip()
+    last_exc: Exception | None = None
+    for _ in range(3):
+        extraction_response = client.chat.completions.create(
+            model=model,
+            messages=extraction_messages,
+            response_format=_build_extraction_format(),
+            max_tokens=4096,
+        )
+        try:
+            raw = extraction_response.choices[0].message.content
+            match = re.search(r"```(?:json)?\s*([\s\S]*?)\s*```", raw)
+            if match:
+                raw = match.group(1).strip()
+            else:
+                start, end = raw.find("{"), raw.rfind("}")
+                if start != -1 and end != -1:
+                    raw = raw[start : end + 1]
+            enrichment = _EnrichmentResult.model_validate_json(raw)
+            break
+        except Exception as exc:
+            last_exc = exc
+            continue
     else:
-        start, end = raw.find("{"), raw.rfind("}")
-        if start != -1 and end != -1:
-            raw = raw[start : end + 1]
-    enrichment = _EnrichmentResult.model_validate_json(raw)
+        raise ValueError("Failed to parse valid enrichment after 3 attempts") from last_exc
 
     return EnrichedCallResult(
         call_analysis=analysis,
