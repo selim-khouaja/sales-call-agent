@@ -15,31 +15,31 @@ Marc: Uh, yeah, we actually crossed 130 last week. It’s… been a bit chaotic,
 
 Alice: I can imagine. What’s been the hardest part on the people side?
 
-Marc: Honestly, onboarding. Like, we have stuff in Notion, some docs here and there, but it’s not structured. New hires keep asking the same questions and—uh—it’s just not scalable.
+Marc: Honestly, onboarding. Like, we have stuff in Notion, some docs here and there, but it’s not structured. New hires keep asking the same questions and—uh—it’s just not scalable. And we’re about to hire another 40 people in Q3, so this is going to break completely if we don’t fix it now.
 
-Alice: Got it. So it’s more about consistency and making sure people ramp quickly?
+Alice: Got it. So it’s more about consistency and making sure people ramp quickly—especially with that hiring surge coming?
 
-Marc: Exactly. And also compliance, especially with remote hires. We’re in France, Germany, and… uh, we’re opening Spain soon.
+Marc: Exactly. And also compliance, especially with remote hires. We’re in France, Germany, and… uh, we’re opening Spain soon. Our legal team flagged us last week, actually—apparently our current contract process doesn’t meet GDPR requirements for some of the new jurisdictions. We need this sorted before end of June or we’re exposed.
 
-Alice: Okay, that’s helpful. And today, how are you managing contracts and employee data?
+Alice: Okay, that’s urgent. And today, how are you managing contracts and employee data?
 
 Marc: Bit of a mess, if I’m honest. Some stuff in Excel, some in Deel, some in—uh—I don’t even know anymore.
 
-Alice: That’s actually pretty common at your stage. If you had a magic wand, what would the ideal setup look like?
+Alice: How big is the contract you’d be looking at? Just to understand the scope.
 
-Marc: One place. Like, just one system where everything lives. Contracts, onboarding flows, time-off, all of it.
+Marc: We’ve got budget approved for up to €180k annually. The board signed off on it last week specifically because of the compliance issue—they want this live before the Q3 hiring wave starts. That’s July 1st, so we have maybe five weeks.
 
-Alice: Makes sense. That’s exactly where we typically come in. We unify HR ops so you don’t have to jump between tools.
+Alice: Five weeks is tight but doable. And who else is involved in the decision?
 
-Marc: Yeah, that sounds… actually very relevant.
+Marc: It’s me and our CFO, Sarah. She’s already seen two vendors this week. Honestly, if your demo hits the compliance angle hard, I think we can move fast—like, decision by end of next week fast.
 
-Alice: Great. Would it make sense to walk you through a quick demo tailored to your setup?
+Alice: That’s very helpful. Would it make sense to walk you through a focused demo on the compliance and onboarding pieces specifically, with Sarah in the room?
 
-Marc: Yeah, for sure. I’d also want our Ops lead to join that.
+Marc: Yeah, for sure. I’d want our Ops lead there too. Can you do this Thursday or Friday?
 
-Alice: Perfect. I’ll send a couple of time slots.
+Alice: Absolutely. I’ll send you a calendar invite for Thursday at 2pm—does that work?
 
-Marc: Sounds good.
+Marc: Thursday works. Let’s do it.
 
 
 **Transcript 2: Stalled Negotiation (Cybersecurity Platform – Mid-Market Enterprise)**
